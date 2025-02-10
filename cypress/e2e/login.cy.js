@@ -6,7 +6,7 @@ describe('Login Page', () => {
     cy.contains('Login');
   });
 
-  it('should find key elements using cy.get()', () => {
+  it.only('should find key elements using cy.get()', () => {
     cy.visit("https://newgencoding.com/qa/cypress/basics/login");
     cy.get('form');
     cy.get('input');
@@ -20,5 +20,8 @@ describe('Login Page', () => {
 
     cy.get('form#login-form');
     cy.get('button[type="submit"]');
+
+    cy.get('button').contains('Login');
+    cy.get('h3').contains('Login');
   });
 });
