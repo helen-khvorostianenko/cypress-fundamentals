@@ -9,7 +9,7 @@ describe('Login Page', () => {
     cy.contains('Login');
   });
 
-  it.only('should find key elements using cy.get()', () => {
+  it('should find key elements using cy.get()', () => {
     cy.get('form');
     cy.get('input');
     cy.get('button');
@@ -26,4 +26,19 @@ describe('Login Page', () => {
     cy.get('button').contains('Login');
     cy.get('h3').contains('Login');
   });
+
+  // Demonstration of various assertions:
+  it.only('should validate the login form elements', () => {
+    // Check visibility
+    cy.get('h3').should('be.visible');
+    cy.get('form#login-form').should('be.visible');
+    cy.get('button[type="submit"]').should('be.visible');
+
+    // Check existence
+    cy.get('div#error-message').should('exist');
+
+    // Check text content
+    cy.get('h3').should('have.text', 'Login');
+    cy.get('button[type="submit"]').should('have.text', 'Login');
+  });  
 });
