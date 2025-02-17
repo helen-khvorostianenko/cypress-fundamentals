@@ -40,5 +40,22 @@ describe('Login Page', () => {
     // Check text content
     cy.get('h3').should('have.text', 'Login');
     cy.get('button[type="submit"]').should('have.text', 'Login');
+
+    // Check attributes
+    cy.get('input#username')
+      .should('have.attr', 'placeholder', 'Enter your username');
+    cy.get('input#password')
+      .should('have.attr', 'placeholder', 'Enter your password');
+
+    // Check class presence
+    cy.get('button[type="submit"]')
+      .should('have.class', 'btn-primary')
+      .and('have.class', 'w-100');
+
+    // Chaining assertions
+    cy.get('button[type="submit"]')
+      .should('be.visible')
+      .and('have.text', 'Login')
+      .and('not.be.disabled');
   });  
 });
