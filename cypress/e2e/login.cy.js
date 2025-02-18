@@ -28,7 +28,7 @@ describe('Login Page', () => {
   });
 
   // Demonstration of various assertions:
-  it.only('should validate the login form elements', () => {
+  it('should validate the login form elements', () => {
     // Check visibility
     cy.get('h3').should('be.visible');
     cy.get('form#login-form').should('be.visible');
@@ -57,5 +57,28 @@ describe('Login Page', () => {
       .should('be.visible')
       .and('have.text', 'Login')
       .and('not.be.disabled');
-  });  
+  });
+  
+  it.only('comparing .get() and .find()', () => {
+    // Introducing the .find() Command
+    cy.get('form').find('div');
+
+    // Global Search with .get()
+    // cy.get('form').get('div');
+    cy.get('form#login-form').get('div').contains('Login');
+    cy.get('form#login-form').get('div').contains('Username');
+    
+    // Contextual Search with .find()
+    // cy.get('form#login-form').find('div').contains('Login'); // This will fail
+    // cy.get('form#login-form').find('div').contains('Username');
+    
+    cy.get('form#login-form').find('div')
+      .should('have.length', 2)
+      .and('not.contain', 'Login')
+      .and('contain', 'Username');
+
+    // Comparing element selection with the CSS selector 
+    cy.get('form#login-form div');
+    cy.get('form#login-form').find('div');
+  });
 });
