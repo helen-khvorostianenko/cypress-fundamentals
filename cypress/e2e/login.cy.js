@@ -59,7 +59,7 @@ describe('Login Page', () => {
       .and('not.be.disabled');
   });
   
-  it.only('comparing .get() and .find()', () => {
+  it('comparing .get() and .find()', () => {
     // Introducing the .find() Command
     cy.get('form').find('div');
 
@@ -80,5 +80,23 @@ describe('Login Page', () => {
     // Comparing element selection with the CSS selector 
     cy.get('form#login-form div');
     cy.get('form#login-form').find('div');
+  });
+
+  it.only('should accept input and submit login form', () => {
+    // Practicing .type() and .clear()
+    // cy.get('#username')
+    //   .type('demo')
+    //   .type('demoPassword');
+
+    // cy.get('#username').clear();
+    cy.get('#username').type('demo');
+    cy.get('#password').type('demoPassword');
+
+    // Practicing .click()
+    cy.get('form#login-form')
+      .find('button[type="submit"]')
+      .click();
+
+    // Using command chaining
   });
 });
