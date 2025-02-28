@@ -92,11 +92,20 @@ describe('Login Page', () => {
     cy.get('#username').type('demo');
     cy.get('#password').type('demoPassword');
 
+    // Using command chaining
+    cy.get('form#login-form')
+      .find('#username')
+      .should('be.visible')
+      .and('have.value', 'demo');
+
+    cy.get('form#login-form')
+      .find('#password')
+      .should('be.visible')
+      .and('have.value', 'demoPassword');
+
     // Practicing .click()
     cy.get('form#login-form')
       .find('button[type="submit"]')
       .click();
-
-    // Using command chaining
   });
 });
