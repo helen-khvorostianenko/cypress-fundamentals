@@ -82,7 +82,7 @@ describe('Login Page', () => {
     cy.get('form#login-form').find('div');
   });
 
-  it.only('should accept input and submit login form', () => {
+  it('should accept input and submit login form', () => {
     // Practicing .type() and .clear()
     // cy.get('#username')
     //   .type('demo')
@@ -108,4 +108,23 @@ describe('Login Page', () => {
       .find('button[type="submit"]')
       .click();
   });
+
+  it.only('should validate form with invalid data', () => {
+    // Explicit Assertions
+    // cy.get('#username').should('be.visible');
+    // cy.get('#password').should('be.visible');
+    // cy.get('button[type="submit"]').should('be.enabled');
+
+    cy.get('#error-message').should('not.be.visible');
+    
+    // Implicit Assertions
+    cy.get('#username').type('invalidUser');
+    cy.get('#password').type('invalidPassword');
+    cy.get('button[type="submit"]').click();
+
+    cy.get('#error-message')
+      .should('be.visible')
+      .and('contain', 'Invalid username or password.');
+    cy.url().should('include', '/login');
+  })
 });
