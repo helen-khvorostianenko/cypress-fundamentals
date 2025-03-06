@@ -129,7 +129,8 @@ describe('Login Page', () => {
   })
 
   it.only('should verify login and redirection', () => {
-    // cy.get('#username').type('wronglogin');
+    // cy.pause();
+    // cy.get('#username').type('wronglogin').debug();
     cy.get('#username').type('demo');
     cy.get('#password').type('demoPassword');
   
