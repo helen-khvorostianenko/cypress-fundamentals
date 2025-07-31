@@ -128,7 +128,7 @@ describe('Login Page', () => {
     cy.url().should('include', '/login');
   })
 
-  it.only('should verify login and redirection', () => {
+  it('should verify login and redirection', () => {
     // cy.pause();
     // cy.get('#username').type('wronglogin').debug();
     cy.get('#username').type('demo');
@@ -146,5 +146,19 @@ describe('Login Page', () => {
     cy.get('button#logout-btn')
       .should('be.visible')
       .and('contain', 'Logout');
+  });
+
+  it.only('should verify successful logout', () => {
+    cy.get('#username').type('demo');
+    cy.get('#password').type('demoPassword');
+
+    cy.get('form#login-form') 
+        .find('button[type="submit"]') 
+        .click();  
+    cy.url().should('include', '/secure');
+
+    cy.get('button#logout-btn').click();
+    cy.location('pathname').should('include', '/login');
+    cy.get('h3').should('contain', 'Login');
   });
 });
